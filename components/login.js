@@ -61,11 +61,13 @@ export default function Login() {
     formData.append('user-id', email);
     formData.append('user-password', password);
 
-    const response = await Form(formData);
+    const url = 'https://mustseeum.com/api/account/login';
+    const response = await Form(url, formData);
 
     if (response['error-code'] !== '0') {
       setResponse(true);
     } else {
+      setResponse(false);
       navigator.navigate('Home');
     }
   };

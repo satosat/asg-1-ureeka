@@ -1,8 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
-import register from '../utils/form';
+import Form from '../utils/form';
 
 export default function Register() {
   const styles = StyleSheet.create({
@@ -39,6 +40,8 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [invalidRegistration, setInvalidRegistration] = useState(false);
 
+  const navigator = useNavigation();
+
   const sendRequest = async () => {
     const formdata = new FormData();
     formdata.append('user-email', email);
@@ -46,12 +49,14 @@ export default function Register() {
     formdata.append('user-name', name);
     formdata.append('user-password', password);
 
-    const response = await register(formdata);
+    const url = 'https://mustseeum.com/api/account/register';
+    const response = await Form(url, formdata);
 
     if (response.message !== 'Success') {
       setInvalidRegistration(true);
     } else {
       setInvalidRegistration(false);
+      navigator.navigate('Home');
     }
   };
 

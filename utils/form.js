@@ -1,6 +1,4 @@
-export default async function Form(data) {
-  const url = 'https://mustseeum.com/api/account/login';
-
+export default async function Form(url, data) {
   const response = await fetch(url, {
     method: 'POST',
     body: data,
