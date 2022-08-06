@@ -14,6 +14,7 @@ export default function Home() {
     };
     sendRequest();
   }, []);
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -25,8 +26,7 @@ export default function Home() {
 
           }}
         />
-        {
-        places.map((place, key) => (
+        {places.map((place, key) => (
           <View
             style={{
               alignItems: 'center',
@@ -46,48 +46,52 @@ export default function Home() {
               }}
             />
             {place['place-rating'] && (
-            <Text style={{
-              color: 'black',
-              fontSize: 16,
-              paddingTop: 30,
-              paddingRight: 30,
-              paddingLeft: 30,
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 16,
+                paddingTop: 30,
+                paddingRight: 30,
+                paddingLeft: 30,
 
-            }}
+              }}
             >
               Rating:
               {' '}
               {place['place-rating'].slice(0, 3)}
             </Text>
             )}
-            <Text style={{
-              fontSize: 36,
-              color: 'black',
-              lineHeight: 48,
-              paddingRight: 30,
-              paddingLeft: 30,
-            }}
+            <Text
+              style={{
+                fontSize: 36,
+                color: 'black',
+                lineHeight: 48,
+                paddingRight: 30,
+                paddingLeft: 30,
+              }}
             >
               {place['place-name']}
             </Text>
-            <Text style={{
-              paddingTop: 14,
-              paddingRight: 30,
-              paddingLeft: 30,
-              color: 'black',
-              fontSize: 16,
-            }}
+            <Text
+              style={{
+                paddingTop: 14,
+                paddingRight: 30,
+                paddingLeft: 30,
+                color: 'black',
+                fontSize: 16,
+              }}
             >
               {place['place-address']}
             </Text>
-            <Text style={{
-              paddingTop: 15,
-              paddingRight: 30,
-              paddingLeft: 30,
-              color: 'black',
-              fontSize: 16,
-              marginBottom: 40,
-            }}
+            <Text
+              style={{
+                paddingTop: 15,
+                paddingRight: 30,
+                paddingLeft: 30,
+                color: 'black',
+                fontSize: 16,
+                marginBottom: 40,
+              }}
             >
               Opens
               {' '}
@@ -98,8 +102,7 @@ export default function Home() {
               {place['close-time'].slice(0, 5)}
             </Text>
           </View>
-        ))
-        }
+        ))}
       </ScrollView>
     </SafeAreaView>
   );

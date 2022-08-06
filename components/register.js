@@ -63,9 +63,10 @@ export default function Register() {
   return (
     <SafeAreaView>
 
-      <View style={{
-        marginBottom: 10,
-      }}
+      <View
+        style={{
+          marginBottom: 10,
+        }}
       >
 
         <View>
@@ -100,10 +101,11 @@ export default function Register() {
           style={styles.registerBtn}
           onPress={sendRequest}
         >
-          <Text style={{
-            color: 'white',
-            fontSize: 18,
-          }}
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 18,
+            }}
           >
             Register
           </Text>

@@ -77,18 +77,19 @@ export default function Login() {
       <View>
         {invalidResponse && <Text style={styles.error}>Data not found!</Text>}
       </View>
-      <View>
-        <Text style={styles.text}>Email</Text>
-        <TextInput
-          style={styles.inputField}
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
+
+      <Text style={styles.text}>Email</Text>
+      <TextInput
+        style={styles.inputField}
+        onChangeText={(text) => setEmail(text)}
+      />
+
       <Text style={styles.text}>Password</Text>
       <TextInput
         style={styles.inputField}
         onChangeText={(text) => setPassword(text)}
       />
+
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={sendRequest}
