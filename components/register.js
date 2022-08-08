@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import Form from '../utils/form';
 
 export default function Register() {
@@ -32,12 +33,19 @@ export default function Register() {
       backgroundColor: '#FFC4C4',
       padding: 10,
     },
+    checkboxContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginHorizontal: 20,
+      marginTop: 20,
+    },
   });
 
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [isAgreed, setIsAgreed] = useState(false);
   const [invalidRegistration, setInvalidRegistration] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -48,10 +56,11 @@ export default function Register() {
     || phone !== ''
     || name !== ''
     || password !== ''
+    || !isAgreed
   );
 
   const sendRequest = async () => {
-    if (validateInput) {
+    if (!validateInput) {
       setInvalidRegistration(true);
       setErrorMessage('Fields cannot be blank');
       return;
@@ -98,6 +107,7 @@ export default function Register() {
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => setPhone(text)}
+          keyboardType="numeric"
         />
 
         <Text style={styles.text}>Name</Text>
@@ -113,6 +123,19 @@ export default function Register() {
           autoCapitalize="none"
           secureTextEntry
         />
+
+        <View style={styles.checkboxContainer}>
+          <BouncyCheckbox
+            text="I agree to the terms and conditions"
+            textStyle={{
+              textDecorationLine: 'none',
+              color: '#000',
+            }}
+            size={30}
+            fillColor="#885AD1"
+            onPress={() => setIsAgreed(!isAgreed)}
+          />
+        </View>
 
         <TouchableOpacity
           style={styles.registerBtn}

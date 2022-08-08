@@ -60,7 +60,7 @@ export default function Login() {
   const validateInput = () => (email !== '' || password !== '');
 
   const sendRequest = async () => {
-    if (validateInput) {
+    if (!validateInput) {
       setResponse(true);
       setErrorMessage('Fields cannot be blank');
       return;
