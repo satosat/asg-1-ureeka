@@ -53,10 +53,19 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalidResponse, setResponse] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigator = useNavigation();
 
+  const validateInput = () => (email !== '' || password !== '');
+
   const sendRequest = async () => {
+    if (validateInput) {
+      setResponse(true);
+      setErrorMessage('Fields cannot be blank');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('user-id', email);
     formData.append('user-password', password);
@@ -66,6 +75,7 @@ export default function Login() {
 
     if (response['error-code'] !== '0') {
       setResponse(true);
+      setErrorMessage('Data not found');
     } else {
       setResponse(false);
       navigator.navigate('Home');
@@ -75,19 +85,22 @@ export default function Login() {
   return (
     <SafeAreaView>
       <View>
-        {invalidResponse && <Text style={styles.error}>Data not found!</Text>}
+        {invalidResponse && <Text style={styles.error}>{errorMessage}</Text>}
       </View>
 
       <Text style={styles.text}>Email</Text>
       <TextInput
         style={styles.inputField}
         onChangeText={(text) => setEmail(text)}
+        autoCapitalize="none"
       />
 
       <Text style={styles.text}>Password</Text>
       <TextInput
         style={styles.inputField}
         onChangeText={(text) => setPassword(text)}
+        autoCapitalize="none"
+        secureTextEntry
       />
 
       <TouchableOpacity

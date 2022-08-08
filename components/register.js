@@ -39,10 +39,24 @@ export default function Register() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [invalidRegistration, setInvalidRegistration] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigator = useNavigation();
 
+  const validateInput = () => (
+    email !== ''
+    || phone !== ''
+    || name !== ''
+    || password !== ''
+  );
+
   const sendRequest = async () => {
+    if (validateInput) {
+      setInvalidRegistration(true);
+      setErrorMessage('Fields cannot be blank');
+      return;
+    }
+
     const formdata = new FormData();
     formdata.append('user-email', email);
     formdata.append('user-phone', phone);
@@ -70,13 +84,14 @@ export default function Register() {
       >
 
         <View>
-          {invalidRegistration && <Text style={styles.error}>Data is Invalid!</Text>}
+          {invalidRegistration && <Text style={styles.error}>{errorMessage}</Text>}
         </View>
 
         <Text style={styles.text}>Email</Text>
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => setEmail(text)}
+          autoCapitalize="none"
         />
 
         <Text style={styles.text}>Phone</Text>
@@ -95,6 +110,8 @@ export default function Register() {
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => setPassword(text)}
+          autoCapitalize="none"
+          secureTextEntry
         />
 
         <TouchableOpacity
